@@ -36,6 +36,9 @@ public class Address {
     @OneToMany(mappedBy = "address", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     private List<Customer> customers;
 
+    @OneToMany(mappedBy = "address", cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private List<Staff> staffs;
+
     public Address(){}
 
     public List<Customer> getCustomers() {
@@ -116,5 +119,13 @@ public class Address {
 
     public void setStores(List<Store> stores) {
         this.stores = stores;
+    }
+
+    public List<Staff> getStaffs() {
+        return staffs;
+    }
+
+    public void setStaffs(List<Staff> staffs) {
+        this.staffs = staffs;
     }
 }

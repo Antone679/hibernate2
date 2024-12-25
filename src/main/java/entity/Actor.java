@@ -65,4 +65,5 @@ public class Actor {
     public void setFilmActors(List<FilmActor> filmActors) {
         this.filmActors = filmActors;
     }
+
 }

@@ -12,10 +12,10 @@ public class App {
             Transaction transaction = session.beginTransaction();
 
             Country country  = new Country();
-            country.setName("Гондурас");
+            country.setName("Биби");
             City city = new City();
             city.setCountry(country);
-            city.setName("Аддис-Аббеба");
+            city.setName("Вларка");
             country.setCities(List.of(city));
             session.persist(country);
             transaction.commit();

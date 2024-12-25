@@ -55,4 +55,5 @@ public class Category {
     public void setFilmCategories(List<FilmCategory> filmCategories) {
         this.filmCategories = filmCategories;
     }
+
 }

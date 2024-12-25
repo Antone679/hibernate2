@@ -38,6 +38,8 @@ public class Customer {
     private Date lastUpdate;
     @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL})
     private List<Payment> payments;
+    @OneToMany(mappedBy = "customer")
+    private List<Rental> rentals;
 
     public Customer(){}
 
@@ -127,5 +129,13 @@ public class Customer {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
     }
 }

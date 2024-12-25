@@ -12,7 +12,7 @@ public class Language {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "language_id")
     private byte id;
-    @Column(name = "name")
+    @Column(name = "name", columnDefinition = "char")
     private String name;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "last_update")
@@ -54,4 +54,5 @@ public class Language {
     public void setFilms(List<Film> films) {
         this.films = films;
     }
+
 }

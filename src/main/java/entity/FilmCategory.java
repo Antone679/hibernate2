@@ -8,10 +8,15 @@ import java.util.Date;
 @Entity
 @Table(name = "film_category")
 public class FilmCategory {
+    @EmbeddedId
+    private FilmCategoryId id;
+
     @ManyToOne
+    @MapsId("filmId")
     @JoinColumn(name = "film_id")
     private Film film;
     @ManyToOne
+    @MapsId("categoryId")
     @JoinColumn(name = "category_id")
     private Category category;
     @Column(name = "last_update")
@@ -44,4 +49,5 @@ public class FilmCategory {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
 }

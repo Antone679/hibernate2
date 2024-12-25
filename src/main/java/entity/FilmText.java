@@ -49,4 +49,5 @@ public class FilmText {
     public void setDescription(String description) {
         this.description = description;
     }
+
 }

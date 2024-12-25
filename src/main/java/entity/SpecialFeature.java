@@ -23,4 +23,5 @@ public enum SpecialFeature {
     public static SpecialFeature fromValue(String value) {
         return SpecialFeature.valueOf(value);
     }
+
 }

@@ -4,12 +4,19 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
-
+@Entity
+@Table(name = "film_actor")
 public class FilmActor {
+
+    @EmbeddedId
+    private FilmActorId id;
+
     @ManyToOne()
+    @MapsId("actorId")
     @JoinColumn(name = "actor_id")
     private Actor actor;
     @ManyToOne
+    @MapsId("filmId")
     @JoinColumn(name = "film_id")
     private Film film;
     @Column(name = "last_update")
@@ -42,5 +49,6 @@ public class FilmActor {
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
     }
+
 
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
+import java.util.List;
+
 @Entity
 @Table(name = "staff")
 public class Staff {
@@ -19,7 +21,7 @@ public class Staff {
     @JoinColumn(name = "address_id")
     private Address address;
     @Lob
-    @Column(name = "picture")
+    @Column(name = "picture", columnDefinition = "BLOB")
     private byte[] picture;
     @Column(name = "email")
     private String email;
@@ -36,6 +38,10 @@ public class Staff {
     @UpdateTimestamp
     @Column(name = "last_update")
     private Date lastUpdate;
+    @OneToMany(mappedBy = "staff")
+    private List<Rental> rentals;
+    @OneToMany(mappedBy = "staff")
+    private List<Payment> payments;
 
     public Staff () {}
 
@@ -125,5 +131,21 @@ public class Staff {
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate;
+    }
+
+    public List<Rental> getRentals() {
+        return rentals;
+    }
+
+    public void setRentals(List<Rental> rentals) {
+        this.rentals = rentals;
+    }
+
+    public List<Payment> getPayments() {
+        return payments;
+    }
+
+    public void setPayments(List<Payment> payments) {
+        this.payments = payments;
     }
 }

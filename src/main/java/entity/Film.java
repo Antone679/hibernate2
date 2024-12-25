@@ -1,11 +1,11 @@
 package entity;
 
 import config.SpecialFeatureConverter;
+import config.YearAttributeConverter;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.Year;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
@@ -20,8 +20,9 @@ public class Film {
     private String title;
     @Column(columnDefinition = "TEXT")
     private String description;
+    @Convert(converter = YearAttributeConverter.class)
     @Column(name = "release_year")
-    private Year releaseYear;
+    private Integer releaseYear;
     @ManyToOne
     @JoinColumn(name = "language_id")
     private Language language;
@@ -29,7 +30,7 @@ public class Film {
     @JoinColumn(name = "original_language_id")
     private Language originalLanguage;
     @Column(name = "rental_duration")
-    private short rentalDuration;
+    private byte rentalDuration;
     @Column(name = "rental_rate", precision = 4, scale = 2)
     private BigDecimal rentalRate;
     @Column(name = "length")
@@ -38,6 +39,8 @@ public class Film {
     private BigDecimal replacementCost;
     @Enumerated(EnumType.STRING)
     private Rating rating;
+    @OneToMany(mappedBy = "film")
+    private List<Inventory> inventories;
 
     @Convert(converter = SpecialFeatureConverter.class)
     @Column(name = "special_features")
@@ -79,11 +82,11 @@ public class Film {
         this.description = description;
     }
 
-    public Year getReleaseYear() {
+    public Integer getReleaseYear() {
         return releaseYear;
     }
 
-    public void setReleaseYear(Year releaseYear) {
+    public void setReleaseYear(Integer releaseYear) {
         this.releaseYear = releaseYear;
     }
 
@@ -103,11 +106,11 @@ public class Film {
         this.originalLanguage = originalLanguage;
     }
 
-    public short getRentalDuration() {
+    public byte getRentalDuration() {
         return rentalDuration;
     }
 
-    public void setRentalDuration(short rentalDuration) {
+    public void setRentalDuration(byte rentalDuration) {
         this.rentalDuration = rentalDuration;
     }
 
@@ -181,5 +184,13 @@ public class Film {
 
     public void setFilmText(FilmText filmText) {
         this.filmText = filmText;
+    }
+
+    public List<Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(List<Inventory> inventories) {
+        this.inventories = inventories;
     }
 }
