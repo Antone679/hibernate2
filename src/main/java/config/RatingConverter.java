@@ -15,15 +15,12 @@ public class RatingConverter implements AttributeConverter<Rating, String> {
     @Override
     public Rating convertToEntityAttribute(String value) {
         if (value == null) {
-            return null; // Если значение null, возвращаем null
+            return null;
         }
-        // Используем метод fromValue для получения соответствующего значения
         try {
-            return Rating.fromValue(value); // Преобразуем строку в Rating
+            return Rating.fromValue(value);
         } catch (IllegalArgumentException e) {
-            // Логируем ошибку, если значение не соответствует перечислению
-            System.err.println("Unknown rating value: " + value);
-            throw e; // Можно выбросить исключение или вернуть значение по умолчанию
+            throw e;
         }
     }
 }

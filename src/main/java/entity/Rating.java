@@ -14,7 +14,7 @@ public enum Rating {
     }
 
     public String getValue() {
-        return displayName; // Возвращаем строковое представление
+        return displayName;
     }
 
     public static Rating fromValue(String value) {
@@ -23,6 +23,6 @@ public enum Rating {
                 return rating;
             }
         }
-        throw new IllegalArgumentException("Unknown value: " + value); // Обработка неизвестного значения
+        throw new IllegalArgumentException("Unknown value: " + value);
     }
 }
