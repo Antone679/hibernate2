@@ -1,11 +1,11 @@
 package entity;
 
 public enum Rating {
-    PG("PG"),
     G("G"),
-    NC_17("NC-17"),
+    PG("PG"),
     PG_13("PG-13"),
-    R("R");
+    R("R"),
+    NC_17("NC-17");
 
     private final String displayName;
 
@@ -13,7 +13,16 @@ public enum Rating {
         this.displayName = displayName;
     }
 
-    public String getDisplayName() {
-        return displayName;
+    public String getValue() {
+        return displayName; // Возвращаем строковое представление
+    }
+
+    public static Rating fromValue(String value) {
+        for (Rating rating : Rating.values()) {
+            if (rating.getValue().equals(value)) {
+                return rating;
+            }
+        }
+        throw new IllegalArgumentException("Unknown value: " + value); // Обработка неизвестного значения
     }
 }

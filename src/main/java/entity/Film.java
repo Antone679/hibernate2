@@ -1,7 +1,7 @@
 package entity;
 
+import config.RatingConverter;
 import config.SpecialFeatureConverter;
-import config.YearAttributeConverter;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -20,7 +20,6 @@ public class Film {
     private String title;
     @Column(columnDefinition = "TEXT")
     private String description;
-    @Convert(converter = YearAttributeConverter.class)
     @Column(name = "release_year")
     private Integer releaseYear;
     @ManyToOne
@@ -37,7 +36,9 @@ public class Film {
     private short length;
     @Column(name = "replacement_cost", scale = 5, precision = 2)
     private BigDecimal replacementCost;
-    @Enumerated(EnumType.STRING)
+
+    @Convert(converter = RatingConverter.class) // Используем конвертер
+    @Column(name = "rating", columnDefinition = "ENUM('G', 'PG', 'PG-13', 'R', 'NC-17')")
     private Rating rating;
     @OneToMany(mappedBy = "film")
     private List<Inventory> inventories;
@@ -49,12 +50,17 @@ public class Film {
     @Column(name = "last_update")
     @UpdateTimestamp
     private Date lastUpdate;
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<FilmCategory> filmCategories;
-    @OneToMany(mappedBy = "film", cascade = CascadeType.ALL)
-    private List<FilmActor> filmActors;
-    @OneToOne(mappedBy = "film" , cascade = CascadeType.ALL)
-    private FilmText filmText;
+    @ManyToMany
+    @JoinTable(name = "film_actor",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns=@JoinColumn(name = "actor_id",referencedColumnName = "actor_id"))
+    private Set<Actor> actors;
+
+    @ManyToMany
+    @JoinTable(name = "film_category",
+            joinColumns = @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
+            inverseJoinColumns=@JoinColumn(name = "category_id",referencedColumnName = "category_id"))
+    private Set<Category> categories;
 
     public Film() {}
 
@@ -146,6 +152,14 @@ public class Film {
         this.rating = rating;
     }
 
+    public List<Inventory> getInventories() {
+        return inventories;
+    }
+
+    public void setInventories(List<Inventory> inventories) {
+        this.inventories = inventories;
+    }
+
     public Set<SpecialFeature> getSpecialFeatures() {
         return specialFeatures;
     }
@@ -162,35 +176,19 @@ public class Film {
         this.lastUpdate = lastUpdate;
     }
 
-    public List<FilmCategory> getFilmCategories() {
-        return filmCategories;
+    public Set<Actor> getActors() {
+        return actors;
     }
 
-    public void setFilmCategories(List<FilmCategory> filmCategories) {
-        this.filmCategories = filmCategories;
+    public void setActors(Set<Actor> actors) {
+        this.actors = actors;
     }
 
-    public List<FilmActor> getFilmActors() {
-        return filmActors;
+    public Set<Category> getCategories() {
+        return categories;
     }
 
-    public void setFilmActors(List<FilmActor> filmActors) {
-        this.filmActors = filmActors;
-    }
-
-    public FilmText getFilmText() {
-        return filmText;
-    }
-
-    public void setFilmText(FilmText filmText) {
-        this.filmText = filmText;
-    }
-
-    public List<Inventory> getInventories() {
-        return inventories;
-    }
-
-    public void setInventories(List<Inventory> inventories) {
-        this.inventories = inventories;
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }

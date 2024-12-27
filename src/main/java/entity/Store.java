@@ -23,10 +23,6 @@ public class Store {
     @Column(name = "last_update")
     @UpdateTimestamp
     private Date lastUpdate;
-    @OneToMany(mappedBy = "store")
-    private List<Inventory> inventories;
-    @OneToOne(mappedBy = "store")
-    private Customer customer;
 
 public Store () {}
 
@@ -62,19 +58,5 @@ public Store () {}
         this.lastUpdate = lastUpdate;
     }
 
-    public List<Inventory> getInventories() {
-        return inventories;
-    }
 
-    public void setInventories(List<Inventory> inventories) {
-        this.inventories = inventories;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 }

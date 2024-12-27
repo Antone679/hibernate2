@@ -23,7 +23,7 @@ public class City {
     @UpdateTimestamp
     private Date lastUpdate;
 
-    @OneToMany(mappedBy = "city", cascade = {CascadeType.PERSIST, CascadeType.MERGE })
+    @OneToMany(mappedBy = "city", cascade = {CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.LAZY)
     private List<Address> addresses;
 
     public City() {

@@ -3,6 +3,7 @@ package entity;
 import jakarta.persistence.*;
 import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 @Entity
 @Table(name = "payment")
@@ -24,7 +25,7 @@ public class Payment {
     private BigDecimal amount;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "payment_date")
-    private Date paymentDate;
+    private LocalDateTime paymentDate;
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @Column(name = "last_update")
@@ -72,11 +73,11 @@ public class Payment {
         this.amount = amount;
     }
 
-    public Date getPaymentDate() {
+    public LocalDateTime getPaymentDate() {
         return paymentDate;
     }
 
-    public void setPaymentDate(Date paymentDate) {
+    public void setPaymentDate(LocalDateTime paymentDate) {
         this.paymentDate = paymentDate;
     }
 

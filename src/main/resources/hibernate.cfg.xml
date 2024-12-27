@@ -11,5 +11,6 @@
         <property name="hibernate.connection.password">666777999A</property>
         <property name="hibernate.hbm2ddl.auto">validate</property>
         <property name="show_sql">true</property>
+        <property name="hibernate.current_session_context_class">thread</property>
     </session-factory>
 </hibernate-configuration>

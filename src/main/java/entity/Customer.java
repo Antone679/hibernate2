@@ -27,7 +27,7 @@ public class Customer {
     @JoinColumn(name = "address_id")
     private Address address;
     @Column(name = "active")
-    private boolean isActive;
+    private boolean active;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
     @CreationTimestamp
@@ -36,7 +36,7 @@ public class Customer {
     @Column(name = "last_update")
     @UpdateTimestamp
     private Date lastUpdate;
-    @OneToMany(mappedBy = "customer", cascade = {CascadeType.ALL})
+    @OneToMany(mappedBy = "customer")
     private List<Payment> payments;
     @OneToMany(mappedBy = "customer")
     private List<Rental> rentals;
@@ -44,11 +44,11 @@ public class Customer {
     public Customer(){}
 
     public boolean isActive() {
-        return isActive;
+        return active;
     }
 
     public void setActive(boolean active) {
-        isActive = active;
+        this.active = active;
     }
 
     public List<Payment> getPayments() {
@@ -107,13 +107,6 @@ public class Customer {
         this.address = address;
     }
 
-    public boolean getIsActive() {
-        return isActive;
-    }
-
-    public void setIsActive(boolean isActive) {
-        this.isActive = isActive;
-    }
 
     public Date getCreateDate() {
         return createDate;

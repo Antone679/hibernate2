@@ -14,23 +14,21 @@ public class Rental {
     private Integer id;
     @Column(name = "rental_date")
     private LocalDateTime rentalDate;
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "inventory_id")
     private Inventory inventory;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "customer_id")
     private Customer customer;
     @Column(name = "return_date")
     private LocalDateTime returnDate;
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "staff_id")
     private Staff staff;
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @Column(name = "last_update")
     private Date lastUpdate;
-    @OneToOne(mappedBy = "rental")
-    private Payment payment;
 
     public Rental () {}
 
@@ -90,11 +88,4 @@ public class Rental {
         this.lastUpdate = lastUpdate;
     }
 
-    public Payment getPayment() {
-        return payment;
-    }
-
-    public void setPayment(Payment payment) {
-        this.payment = payment;
-    }
 }

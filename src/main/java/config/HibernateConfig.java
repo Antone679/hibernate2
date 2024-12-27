@@ -17,8 +17,6 @@ public class HibernateConfig {
                     .addAnnotatedClass(Country.class)
                     .addAnnotatedClass(Customer.class)
                     .addAnnotatedClass(Film.class)
-                    .addAnnotatedClass(FilmActor.class)
-                    .addAnnotatedClass(FilmCategory.class)
                     .addAnnotatedClass(FilmText.class)
                     .addAnnotatedClass(Inventory.class)
                     .addAnnotatedClass(Language.class)

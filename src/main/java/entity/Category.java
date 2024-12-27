@@ -5,6 +5,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "category")
@@ -19,8 +20,11 @@ public class Category {
     @UpdateTimestamp
     @Column(name = "last_update")
     private Date lastUpdate;
-    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL)
-    private List<FilmCategory> filmCategories;
+    @ManyToMany
+    @JoinTable(name = "film_category",
+            joinColumns = @JoinColumn(name = "category_id", referencedColumnName = "category_id"),
+            inverseJoinColumns=@JoinColumn(name = "film_id",referencedColumnName = "film_id"))
+    private Set<Film> films;
 
     public Category() {}
 
@@ -48,12 +52,11 @@ public class Category {
         this.lastUpdate = lastUpdate;
     }
 
-    public List<FilmCategory> getFilmCategories() {
-        return filmCategories;
+    public Set<Film> getFilms() {
+        return films;
     }
 
-    public void setFilmCategories(List<FilmCategory> filmCategories) {
-        this.filmCategories = filmCategories;
+    public void setFilms(Set<Film> films) {
+        this.films = films;
     }
-
 }
